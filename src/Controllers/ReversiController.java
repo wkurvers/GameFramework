@@ -50,7 +50,7 @@ public class ReversiController extends GameController {
     }
 
     public int[] calculateMove(int move, int player, int[] newDataSet){
-        System.out.println("Calculating move");
+        //System.out.println("Calculating move");
         // set the selected square tot the players color
 
 
@@ -419,13 +419,13 @@ public class ReversiController extends GameController {
             //run AI code.
             AI ai = new AI(this);
             //System.out.println("AI is made");
+            System.out.println("Possible moves");
             int move = ai.makeMove(dataController.getData(), dataController.getPossibleMoves());
             //System.out.println("AI made move " + move);
-            try {
-                Thread.sleep(1000);
+            /*try {
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
-            }
+            }*/
             sentMove(move);
         }
     }

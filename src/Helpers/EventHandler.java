@@ -62,15 +62,18 @@ public class EventHandler {
      */
     private void SVRHandler(String response)
     {
+        //System.out.println(response);
         String command = response.split(" ")[0];
         if("HELP".equals(command))
         {
-            System.out.println("Server gave help information:");
+            //System.out.println("Server gave help information:");
             System.out.println(response);
         }
         if("PLAYERLIST".equals(command))
         {
-            this.PlayerlistHandler(response.substring(11));
+            if(!response.substring(11).equals("[]")) {
+                this.PlayerlistHandler(response.substring(11));
+            }
         }
         if("GAMELIST".equals(command))
         {
@@ -84,7 +87,7 @@ public class EventHandler {
             {
                 case "MATCH" :
                     this.MatchHandler(response.substring(6));
-                    System.out.println("Match started.");
+                    //System.out.println("Match started.");
                     break;
                 case "YOURTURN" :
                     this.TurnHandler(response.substring(9));
@@ -123,8 +126,10 @@ public class EventHandler {
         dataController.clearPlayerlist();
         for(String name : response.split(","))
         {
-            name = name.substring(1, name.length() - 1);
-            dataController.addPlayerlistItem(name);
+            if(name.substring(1,name.length() -1).length() > 0) {
+                name = name.substring(1, name.length() - 1);
+                dataController.addPlayerlistItem(name);
+            }
         }
 
     }
@@ -189,6 +194,12 @@ public class EventHandler {
         {
             Yourturn = false;
             playerOne = false;
+        }
+        System.out.println("Current dataset + " + dataController.getDataSet());
+        if(dataController.getDataSet() == null) {
+            if(parameters.get("GAMETYPE").equals("Reversi")) {
+                dataController.setDatasetType(GameType.Reversi);
+            }
         }
         dataController.setYourTurn(Yourturn);
         dataController.setPlayerOne(playerOne);
@@ -300,6 +311,7 @@ public class EventHandler {
     {
         String headerText = "";
         String contentText = "" ;
+        DataController.getInstance().setDatasetType(GameType.Reversi);
 
         switch(state)
         {

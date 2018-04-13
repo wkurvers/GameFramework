@@ -56,12 +56,12 @@ public class DataController {
     public void setDatasetType(GameType type)
     {
         if(type == GameType.Reversi) {
+            System.out.println("Setting dataset type to reversi");
             this.dataset = new ReversiDataset();
             this.dataset.gameType = type;
         }
 
         if(type == GameType.Tictactoe) {
-            //System.out.println("Setting dataset type to tictactoe");
             this.dataset = new TicTacToeDataset();
             this.dataset.gameType = type;
         }
@@ -166,6 +166,8 @@ public class DataController {
     {
         return this.dataset.gameData;
     }
+
+    public Dataset getDataSet() {return dataset;}
 
 
     /***
