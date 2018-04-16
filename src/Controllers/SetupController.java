@@ -32,6 +32,13 @@ public class SetupController {
         return new LoginView(this).getLoginScene();
     }
 
+    /**
+     * Starts a connection with the server and if the name is valid sends the login command
+     * @param name the entered username
+     * @param host the entered host(ip address)
+     * @param port the entered port
+     * @return true if it was able to login, false if not
+     */
     public boolean login(String name, String host, String port)
     {
         connection = TCPConnection.getInstance();
@@ -58,6 +65,13 @@ public class SetupController {
         return true;
     }
 
+    /**
+     * Shows an Alert to the screen
+     * @param type the type of alert
+     * @param title the title of the alert
+     * @param headerText the header of the alert
+     * @param contentText the content of the alert
+     */
     public void showAlert(Alert.AlertType type, String title, String headerText, String contentText) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -151,6 +165,10 @@ public class SetupController {
         }
     }
 
+    /**
+     * Starts the setup view
+     * @return the scene from the setup view
+     */
     public Scene InitializeSetupView()
     {
         return new SetupView(this).getSetupScene();
